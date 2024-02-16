@@ -33,19 +33,7 @@ pipeline {
                 }
             }
         }
-        stage('Push image'){
-            steps{
-                script {
-                    // Log in to Docker Hub using Jenkins credentials
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerHub', usernameVariable: 'DOCKER_HUB_CREDENTIALS_USR', passwordVariable: 'DOCKER_HUB_CREDENTIALS_PSW']]) {
-                        sh 'docker login -u $DOCKER_HUB_CREDENTIALS_USR -p $DOCKER_HUB_CREDENTIALS_PSW'
-                    }
-                    // Push the image to Docker Hub
-                    sh 'docker push gifti/b-safe:latest'
-                }
-            }
-        }
-        
+
         stage('Test'){
             steps {
                 script {
@@ -64,6 +52,20 @@ pipeline {
                 }
             }
         } 
+
+        stage('Push image'){
+            steps{
+                script {
+                    // Log in to Docker Hub using Jenkins credentials
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerHub', usernameVariable: 'DOCKER_HUB_CREDENTIALS_USR', passwordVariable: 'DOCKER_HUB_CREDENTIALS_PSW']]) {
+                        sh 'docker login -u $DOCKER_HUB_CREDENTIALS_USR -p $DOCKER_HUB_CREDENTIALS_PSW'
+                    }
+                    // Push the image to Docker Hub
+                    sh 'docker push gifti/b-safe:latest'
+                }
+            }
+        }
+        
         stage('Cleanup') {
             steps {
                 script {
