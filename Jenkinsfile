@@ -17,6 +17,7 @@ pipeline {
                     // Build steps (replace with your build commands)
                     sh 'echo "Building..."'
                     sh 'ls'
+                    sh 'docker images'
                 }
             }
         }
