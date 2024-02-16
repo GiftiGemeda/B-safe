@@ -25,6 +25,7 @@ pipeline {
                     sh 'docker images'
 
                     // Run Docker container in the background and capture the container ID
+                    // expose the application on port 5000 so it is accessable
                     def containerId = sh(script: 'docker run -d -p 5000:5000 theapp', returnStdout: true).trim()
                     
                     // Save container ID for later
