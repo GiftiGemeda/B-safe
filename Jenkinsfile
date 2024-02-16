@@ -18,6 +18,7 @@ pipeline {
                     sh 'echo "Building..."'
                     sh 'ls'
                     sh 'docker images'
+                    sh 'docker build -t theapp .'
                 }
             }
         }
